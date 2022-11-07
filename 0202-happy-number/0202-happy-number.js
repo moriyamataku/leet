@@ -14,7 +14,6 @@ var isHappy = function(n) {
 };
 
 var calc = function(n) {
-    let num = n;
     let ret = 0;
     while(n !== 0) {
         const p = n % 10
