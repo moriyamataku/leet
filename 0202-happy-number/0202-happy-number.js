@@ -3,16 +3,14 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-    let fast = n
+    let fast = calc(n)
     let slow = n
     
-    while(true) {
+    while(fast !== 1 && fast !== slow) {
         fast = calc(calc(fast))
         slow = calc(slow)
-        if(fast === 1) return true
-        if(fast === slow) return false
     }
-    // return true
+    return fast === 1
 };
 
 var calc = function(n) {
