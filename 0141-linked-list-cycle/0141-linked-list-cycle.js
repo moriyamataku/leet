@@ -11,13 +11,13 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    let fast = head ? head.next : null;
+    let fast = head;
     let slow = head;
     while(fast && fast.next) {
-        if(fast === slow) return true
-
         fast = fast.next.next
         slow = slow.next
+
+        if(fast === slow) return true
     }
     return false
 };
