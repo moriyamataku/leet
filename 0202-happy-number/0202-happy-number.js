@@ -9,7 +9,7 @@ var isHappy = function(n) {
     while(true) {
         fast = calc(calc(fast))
         slow = calc(slow)
-        if(fast === 1 || slow === 1) return true
+        if(fast === 1) return true
         if(fast === slow) return false
     }
     // return true
