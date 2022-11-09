@@ -10,10 +10,9 @@ var intervalIntersection = function(firstList, secondList) {
     while(f < firstList.length && s < secondList.length) {
         const first = firstList[f];
         const second = secondList[s];
-        const int = makeInter(first, second);
-        if(int) ret.push(int);
-        
-        // console.log(first, second, int, ret);
+        const lo = Math.max(first[0], second[0]);
+        const hi = Math.min(first[1], second[1]);
+        if(lo <= hi) ret.push([lo, hi])
         
         if(firstList[f][1] < secondList[s][1]) {
             f++;
@@ -24,12 +23,3 @@ var intervalIntersection = function(firstList, secondList) {
     return ret;
 };
     
-var makeInter = function(first, second) {
-    if((first[0] <= second[0] && second[0] <= first[1]) ||
-       (second[0] <= first[0] && first[0] <= second[1])) {
-        const start = Math.max(first[0], second[0]);
-        const end = Math.min(first[1], second[1]);
-        return [start, end]
-    }
-    return null;
-}
