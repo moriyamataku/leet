@@ -4,36 +4,23 @@
  */
 var merge = function(intervals) {
     let ret = []
-    for(let i = 0; i < intervals.length; i++) {
-        ret = mergeIfOverlap(intervals[i], ret)
-    }
-    return ret
-};
-
-var mergeIfOverlap = function(target, arr) {
-    // console.log(target, arr)
-    for(let i = 0; i < arr.length; i++) {
-        if(mergeAble(target, arr[i])) {
-            arr[i][0] = Math.min(arr[i][0], target[0]);
-            arr[i][1] = Math.max(arr[i][1], target[1]);
-            
-            if(arr.length > 1) {
-                const merged = arr[i]
-                arr = arr.filter((_, idx) => idx !== i)
-                return mergeIfOverlap(merged, arr)
-            }
-            return arr;
+    const sorted = intervals.sort((a, b) => a[0] - b[0])
+    for(let i = 0; i < sorted.length; i++) {
+        if(ret.length === 0) {
+            ret.push(sorted[i]); 
+            continue;
+        }
+        
+        const checker = ret[ret.length - 1]
+        // console.log(checker, ret, sorted[i])
+        if(checker[1] < sorted[i][0]) {
+            ret.push(sorted[i])
+        } else {
+            checker[1] = Math.max(checker[1], sorted[i][1])
         }
     }
-    arr.push(target);
-    return arr;
-}
+    return ret
+    // return sorted
+};
 
-var mergeAble = function(a, b) {
-    if(a[0] <= b[0] && a[1] >= b[0]) return true;
-    if(a[0] <= b[1] && a[1] >= b[1]) return true;
-    if(b[0] <= a[0] && b[1] >= a[0]) return true;
-    if(b[0] <= a[1] && b[1] >= a[1]) return true;
-    
-    return false;
-}
+
