@@ -23,7 +23,7 @@ var rotateRight = function(head, k) {
         current = current.next || tail
         count++;
     } 
-    console.log(current, previous)
+    // console.log(current, previous)
     const next = current.next
     current.next = null
     if(head !== tail && next !== null) head.next = tail
