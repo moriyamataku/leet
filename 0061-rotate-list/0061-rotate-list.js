@@ -11,34 +11,28 @@
  * @return {ListNode}
  */
 var rotateRight = function(head, k) {
-    if(!head || k < 1) return head
-    let count = 1
-    const tail = reverse(head)
-    // console.log(head, tail)
-    let current = tail
-    let previous = null
-    while(current) {
-        if(count === k) break;
-        previous = current
-        current = current.next || tail
+    if(head === null || head.next === null) return head
+    let count = 0
+    let cur = head
+    let last = null
+    let prev = null
+    while(cur) {
         count++;
-    } 
-    // console.log(current, previous)
-    const next = current.next
-    current.next = null
-    if(head !== tail && next !== null) head.next = tail
-    return (next !== null) ? reverse(next) : reverse(tail)
+        last = cur
+        cur = cur.next
+    }
+    const rotate = count - (k % count)
+    if(rotate === count) return head
+
+    cur = head
+    count = 0
+    while(count < rotate) {
+        prev = cur
+        cur = cur.next
+        count++;
+    }
+    prev.next = null
+    last.next = head
+    return cur
 };
 
-var reverse = function(head) {
-    let tail = head
-    let current = head
-    let previous = null
-    while(current) {
-        const next = current.next
-        current.next = previous
-        previous = current
-        current = next
-    }
-    return previous
-}
