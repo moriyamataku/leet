@@ -4,18 +4,21 @@
  * @return {boolean}
  */
 var isIsomorphic = function(s, t) {
-    return checkTwo(s, t) && checkTwo(t, s)
-};
-
-var checkTwo = function(a, b) {
-    if(a.length !== b.length) return false
-
-    const words = {}
-    for(let i = 0; i < a.length; i++) {
-        if(words[a[i]]) {
-            if(words[a[i]] !== b[i]) return false
+    if(s.length !== t.length) return false
+    const hash_s = {}
+    const hash_t = {}
+    for(let i = 0; i < s.length; i++) {
+        if(hash_s[s[i]]) {
+            if(hash_s[s[i]] !== t[i]) return false
+        } else {
+            hash_s[s[i]] = t[i]
         }
-        words[a[i]] = b[i]
+        if(hash_t[t[i]]) {
+            if(hash_t[t[i]] !== s[i]) return false
+        } else {
+            hash_t[t[i]] = s[i]
+        }
     }
     return true
-}
+};
+
