@@ -13,15 +13,18 @@
 var levelOrder = function(root) {
     if(!root) return [];
     const ret = []
-    let stack = [root]
-    while(stack.length !== 0) {
-        ret.push(stack.map(node => node.val))
-        let nextStack = []
-        stack.forEach(node => {
-            if(node.left) nextStack.push(node.left)
-            if(node.right) nextStack.push(node.right)
-        });
-        stack = nextStack
-    }
+    traversal([root], ret)
     return ret;
 };
+
+var traversal = function(stack, result) {
+    const nextStack = []
+    const vals = []
+    stack.forEach(node => {
+        vals.push(node.val)
+        if(node.left) nextStack.push(node.left)
+        if(node.right) nextStack.push(node.right)
+    })
+    result.push(vals)
+    if(nextStack.length !== 0) traversal(nextStack, result)
+}
