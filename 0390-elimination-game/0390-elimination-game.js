@@ -3,19 +3,18 @@
  * @return {number}
  */
 var lastRemaining = function(n) {
-    
     let num = n
-    let count = 0
+    let counter = 1
     let left = true
     let last = n
     while(num > 1) {
         if(left) {
-            last = (num % 2 === 0) ? last : last - Math.pow(2, count)
+            last = (num % 2 === 0) ? last : last - counter
         } else {
-            last = last - Math.pow(2, count)
+            last = last - counter
         }
         num = parseInt(num / 2)
-        count++;
+        counter = counter * 2
         left = !left
     }
     return last
