@@ -13,47 +13,13 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function(root, p, q) {
-    const r = {}
-    r[root.val] = null
-    const hash = [r]
-    let stack = [root]
-    while(stack.length !== 0) {
-        const h = {}
-        const nextStack = []
-        stack.forEach(s => {
-            if(s.left) {
-                h[s.left.val] = s
-                nextStack.push(s.left)
-            }
-            if(s.right) {
-                h[s.right.val] = s
-                nextStack.push(s.right)
-            }
-        })
-        hash.push(h)
-        stack = nextStack
+
+    if(root.val > p.val && root.val > q.val) {
+        return lowestCommonAncestor(root.left, p, q)
+    }
+    if(root.val < p.val && root.val < q.val) {
+        return lowestCommonAncestor(root.right, p, q)
     }
     
-    let pa = p
-    let qa = q
-    // console.log(pa, qa, hash)
-    while(pa !== qa) {
-        let changed = false
-        for(let i = hash.length - 1; i >= 0; i--) {
-            // console.log(pa, qa, i)
-            const h = hash[i]
-            if(h[pa.val]) {
-                pa = h[pa.val]
-                changed = true
-            }
-            if(h[qa.val]) {
-                qa = h[qa.val]
-                changed = true
-            }
-            if(changed) break;
-        }
-        // console.log(pa, qa)
-    }
-    // console.log(pa)
-    return pa
+    return root
 };
