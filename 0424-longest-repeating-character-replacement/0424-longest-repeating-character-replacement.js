@@ -14,10 +14,10 @@ var maxLength = function(s, k, low, high) {
     
     if(!v) {
         if(low === mid - 1) return low
-        return maxLength(s, k ,low, mid, high)
+        return maxLength(s, k ,low, mid)
     } else {
-        if(valid(s, k, high)) return high
-        return maxLength(s, k, mid, high - 1)
+        if(mid === high) return high
+        return maxLength(s, k, mid, high)
     }
 }
 
