@@ -10,12 +10,32 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    let current = head;
-    const ary = [];
-    while( current ) {
-        ary.push(current.val);
-        current = current.next;
+    let slow = head
+    let fast = head
+    while( fast && fast.next ) {
+        slow = slow.next
+        fast = fast.next.next
     }
     
-    return ary.join('') === ary.reverse().join('')
+    const last = reverse(slow)
+    slow = head
+    fast = last 
+    while(slow && fast) {
+        if(slow.val !== fast.val) return false
+        slow = slow.next
+        fast = fast.next
+    }
+    return true
 };
+
+var reverse = function(head) {
+    let current = head
+    let last = null
+    while(current) {
+        const next = current.next
+        current.next = last
+        last = current
+        current = next
+    }
+    return last
+}
