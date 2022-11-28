@@ -27,7 +27,7 @@ var oddEvenList = function(head) {
         current = next
         if(current) tail = current
     }
-    console.log(head, first, current, last ,tail)
+    // console.log(head, first, current, last ,tail)
     if(last) last.next = null
     if(tail) tail.next = first
     return head
