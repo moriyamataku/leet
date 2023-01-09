@@ -15,12 +15,12 @@ var canFinish = function(numCourses, prerequisites) {
     // console.log(con)
     for (const [key, value] of con.entries()) {
         const queue = value.slice()
-        const checked = new Map();
+        const checked = new Set();
         while(queue.length > 0) {
             const q = queue.shift();
             // console.log(con, queue, q, checked)
             if(checked.has(q)) continue;
-            checked.set(q, 1)
+            checked.add(q)
             if (q === key) return false;
             const tar = con.get(q)
             tar.forEach(t => queue.push(t))
