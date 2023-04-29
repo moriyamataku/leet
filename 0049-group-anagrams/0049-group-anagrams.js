@@ -9,7 +9,7 @@ var groupAnagrams = function(strs) {
             pre[cur] ? pre[cur] += 1 : pre[cur] = 1
             return pre
         },{})
-        const key = Object.entries(count).sort((a, b) => a[0].charCodeAt(0) - b[0].charCodeAt(0)).map((arr) => `${arr[0]}-${arr[1]}`).join(',')
+        const key = Object.entries(count).sort((a, b) => a[0].localeCompare(b[0])).map((arr) => `${arr[0]}-${arr[1]}`).join(',')
         
         result[key] ? result[key].push(str) : result[key] = [str]
     })
